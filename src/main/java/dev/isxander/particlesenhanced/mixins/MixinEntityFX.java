@@ -7,7 +7,6 @@
 package dev.isxander.particlesenhanced.mixins;
 
 import dev.isxander.particlesenhanced.config.ParticlesEnhancedConfig;
-import dev.isxander.xanderlib.utils.MathUtils;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
@@ -31,7 +30,7 @@ public abstract class MixinEntityFX {
 
         if (!cfg.getFade()) return;
 
-        float lifeSpan = MathUtils.getPercent(particleAge, particleMaxAge * (cfg.getMinFadeTransparency() / 100f), particleMaxAge);
+        float lifeSpan = (particleAge - (particleMaxAge * (cfg.getMinFadeTransparency() / 100f)) / (particleMaxAge - (particleMaxAge * (cfg.getMinFadeTransparency() / 100f))));
         if (lifeSpan > ParticlesEnhancedConfig.INSTANCE.getFadeOutStart()) {
             float alpha = 1 - lifeSpan + ParticlesEnhancedConfig.INSTANCE.getFadeOutStart();
             if (getAlpha() != alpha) setAlphaF(alpha);

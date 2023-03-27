@@ -1,23 +1,31 @@
+@file:Suppress("PropertyName")
+
 pluginManagement {
     repositories {
-        mavenCentral()
         gradlePluginPortal()
-
-        maven(url = "https://maven.minecraftforge.net")
-        maven(url = "https://jitpack.io")
+        mavenCentral()
+        maven("https://repo.polyfrost.cc/releases") // Adds the Polyfrost maven repository to get Polyfrost Gradle Toolkit
     }
-
-    resolutionStrategy {
-        eachPlugin {
-            when (requested.id.id) {
-                "net.minecraftforge.gradle.forge" ->
-                    useModule("com.github.asbyth:ForgeGradle:${requested.version}")
-                "org.spongepowered.mixin" ->
-                    useModule("com.github.xcfrg:MixinGradle:${requested.version}")
-            }
-        }
+    plugins {
+        val pgtVersion = "0.1.28" // Sets the default versions for Polyfrost Gradle Toolkit
+        id("cc.polyfrost.multi-version.root") version pgtVersion
     }
 }
 
-rootProject.name = "ParticlesEnhanced"
+val mod_name: String by settings
 
+// Configures the root project Gradle name based on the value in `gradle.properties`
+rootProject.name = mod_name
+rootProject.buildFileName = "root.gradle.kts"
+
+// Adds all of our build target versions to the classpath if we need to add version-specific code.
+listOf(
+        "1.8.9-forge", // Update this if you want to remove/add a version, along with `build.gradle.kts` and `root.gradle.kts`.
+        "1.12.2-forge"
+).forEach { version ->
+    include(":$version")
+    project(":$version").apply {
+        projectDir = file("versions/$version")
+        buildFileName = "../../build.gradle.kts"
+    }
+}

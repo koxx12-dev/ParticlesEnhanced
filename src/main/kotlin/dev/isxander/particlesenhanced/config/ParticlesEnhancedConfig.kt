@@ -6,16 +6,15 @@
 
 package dev.isxander.particlesenhanced.config
 
-import dev.isxander.particlesenhanced.ParticlesEnhanced
-import gg.essential.vigilance.Vigilant
-import gg.essential.vigilance.data.Property
-import gg.essential.vigilance.data.PropertyType
-import net.minecraft.util.EnumParticleTypes
-import java.io.File
+import cc.polyfrost.oneconfig.config.Config
+import cc.polyfrost.oneconfig.config.annotations.Dropdown
+import cc.polyfrost.oneconfig.config.annotations.Slider
+import cc.polyfrost.oneconfig.config.annotations.Switch
+import cc.polyfrost.oneconfig.config.data.Mod
+import cc.polyfrost.oneconfig.config.data.ModType
 
-object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "config.toml"), "Particles Enhanced") {
-    @Property(
-        type = PropertyType.SELECTOR,
+object ParticlesEnhancedConfig : Config(Mod("ParticlesEnhanced", ModType.UTIL_QOL), "particlesenhanced/config.toml") {
+    @Dropdown(
         name = "Critical Particle Type",
         description = "Change what type of particle appears when you get a critical hit.",
         category = "Aesthetics",
@@ -24,8 +23,7 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
     )
     var critParticleType = 9
 
-    @Property(
-        type = PropertyType.SELECTOR,
+    @Dropdown(
         name = "Sharpness Particle Type",
         description = "Change what type of particle appears when you get a sharpness hit.",
         category = "Aesthetics",
@@ -34,8 +32,7 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
     )
     var sharpParticleType = 10
 
-    @Property(
-        type = PropertyType.SWITCH,
+    @Switch(
         name = "Check Invulnerability",
         description = "Before showing the critical or sharpness particles, check if the player can be hit (e.g. isn't in creative mode)",
         category = "Aesthetics",
@@ -43,8 +40,7 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
     )
     var checkInvulnerable = true
 
-    @Property(
-        type = PropertyType.SWITCH,
+    @Switch(
         name = "Always Show Criticals",
         description = "Every time you hit an entity, critical particles are spawned.",
         category = "Aesthetics",
@@ -52,8 +48,7 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
     )
     var alwaysCrit = false
 
-    @Property(
-        type = PropertyType.SWITCH,
+    @Switch(
         name = "Always Show Sharpness",
         description = "Every time you hit an entity, sharpness particles are spawned.",
         category = "Aesthetics",
@@ -61,8 +56,7 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
     )
     var alwaysSharp = false
 
-    @Property(
-        type = PropertyType.SWITCH,
+    @Switch(
         name = "Override Critical Bow Arrows",
         description = "When you fire a full charge hit with a bow, critical particles are spawned. Override with your desired particle?",
         category = "Aesthetics",
@@ -71,8 +65,7 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
     var overrideCriticalBow = true
 
 
-    @Property(
-        type = PropertyType.SWITCH,
+    @Switch(
         name = "Fade",
         description = "Make particles fade rather than just disappearing.",
         category = "Aesthetics",
@@ -80,55 +73,45 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
     )
     var fade = true
 
-    @Property(
-        type = PropertyType.PERCENT_SLIDER,
+    @Slider(
         name = "Fade Out Start",
         description = "How far into the lifespan of the particle before it starts to fade.",
         category = "Aesthetics",
-        subcategory = "Fade"
+        subcategory = "Fade",
+        max = 1F,
+        min = 0F
     )
     var fadeOutStart = 0.5f
 
-    @Property(
-        type = PropertyType.SLIDER,
+    @Slider(
         name = "Minimum Transparency",
         description = "Rather than fading to nothing fade to this value.",
         category = "Aesthetics",
         subcategory = "Fade",
-        max = 100,
-        min = 0
+        max = 100F,
+        min = 0F
     )
     var minFadeTransparency = 0
 
-    @Property(
-        type = PropertyType.SLIDER,
+    @Slider(
         name = "Critical Multiplier",
         description = "How many critical particles you want to see.",
         category = "Aesthetics",
         subcategory = "Multipliers",
-        max = 20,
-        min = 0
+        max = 20F,
+        min = 0F
     )
     var critMultiplier = 1
 
-    @Property(
-        type = PropertyType.SLIDER,
+    @Slider(
         name = "Sharpness Multiplier",
         description = "How many sharpness particles you want to see.",
         category = "Aesthetics",
         subcategory = "Multipliers",
-        max = 20,
-        min = 0
+        max = 20F,
+        min = 0F
     )
     var sharpMultiplier = 1
-
-    @Property(
-        type = PropertyType.SWITCH,
-        name = "Check for Updates",
-        description = "Connect to the internet to check if you are using the latest version on ParticlesEnhanced.",
-        category = "Connectivity"
-    )
-    var checkUpdates = true
 
     init { initialize() }
 }
