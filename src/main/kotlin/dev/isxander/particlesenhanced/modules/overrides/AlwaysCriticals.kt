@@ -7,8 +7,8 @@
 package dev.isxander.particlesenhanced.modules.overrides
 
 import dev.isxander.particlesenhanced.config.ParticlesEnhancedConfig
-import dev.isxander.xanderlib.event.PacketEvent
-import dev.isxander.xanderlib.utils.Constants.mc
+import dev.isxander.particlesenhanced.utils.PacketEvent
+import dev.isxander.particlesenhanced.utils.mc
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
@@ -29,7 +29,7 @@ object AlwaysCriticals {
         if (!ParticlesEnhancedConfig.checkInvulnerable) return
 
         if (event.packet is S19PacketEntityStatus) {
-            val packet = event.packet as S19PacketEntityStatus
+            val packet = event.packet
             if (packet.opCode.toInt() != 2) return
 
             val target = packet.getEntity(mc.theWorld) ?: return

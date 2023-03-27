@@ -7,16 +7,14 @@
 package dev.isxander.particlesenhanced.modules.overrides
 
 import dev.isxander.particlesenhanced.config.ParticlesEnhancedConfig
-import dev.isxander.xanderlib.event.PacketEvent
-import dev.isxander.xanderlib.utils.Constants
-import dev.isxander.xanderlib.utils.Constants.mc
+import dev.isxander.particlesenhanced.utils.PacketEvent
+import dev.isxander.particlesenhanced.utils.mc
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.EnumCreatureAttribute
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.network.play.server.S19PacketEntityStatus
-import net.minecraft.util.DamageSource
 import net.minecraft.util.EnumParticleTypes
 import net.minecraftforge.event.entity.player.AttackEntityEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -31,10 +29,10 @@ object AlwaysSharpness {
         if (!ParticlesEnhancedConfig.checkInvulnerable) return
 
         if (event.packet is S19PacketEntityStatus) {
-            val packet = event.packet as S19PacketEntityStatus
+            val packet = event.packet
             if (packet.opCode.toInt() != 2) return
 
-            val target = packet.getEntity(Constants.mc.theWorld) ?: return
+            val target = packet.getEntity(mc.theWorld) ?: return
             if (attacker != null && targetId == target.entityId) {
                 doSharpness(attacker!!, target)
                 attacker = null
@@ -46,7 +44,7 @@ object AlwaysSharpness {
     @SubscribeEvent
     fun onAttack(event: AttackEntityEvent) {
         if (ParticlesEnhancedConfig.checkInvulnerable) {
-            if (event.entityPlayer.entityId == Constants.mc.thePlayer.entityId) {
+            if (event.entityPlayer.entityId == mc.thePlayer.entityId) {
                 attacker = event.entityPlayer
                 targetId = event.target.entityId
             }

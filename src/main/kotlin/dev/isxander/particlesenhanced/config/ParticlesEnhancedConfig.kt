@@ -6,14 +6,12 @@
 
 package dev.isxander.particlesenhanced.config
 
-import dev.isxander.particlesenhanced.ParticlesEnhanced
 import gg.essential.vigilance.Vigilant
 import gg.essential.vigilance.data.Property
 import gg.essential.vigilance.data.PropertyType
-import net.minecraft.util.EnumParticleTypes
 import java.io.File
 
-object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "config.toml"), "Particles Enhanced") {
+object ParticlesEnhancedConfig : Vigilant(File("config/particlesenhanced", "config.toml"), "Particles Enhanced") {
     @Property(
         type = PropertyType.SELECTOR,
         name = "Critical Particle Type",
@@ -34,14 +32,16 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
     )
     var sharpParticleType = 10
 
+    /* Currently doesn't work so :)
     @Property(
         type = PropertyType.SWITCH,
         name = "Check Invulnerability",
         description = "Before showing the critical or sharpness particles, check if the player can be hit (e.g. isn't in creative mode)",
         category = "Aesthetics",
         subcategory = "Overrides"
-    )
-    var checkInvulnerable = true
+    )*/
+    var checkInvulnerable = false
+
 
     @Property(
         type = PropertyType.SWITCH,
@@ -121,14 +121,6 @@ object ParticlesEnhancedConfig : Vigilant(File(ParticlesEnhanced.DATA_DIR, "conf
         min = 0
     )
     var sharpMultiplier = 1
-
-    @Property(
-        type = PropertyType.SWITCH,
-        name = "Check for Updates",
-        description = "Connect to the internet to check if you are using the latest version on ParticlesEnhanced.",
-        category = "Connectivity"
-    )
-    var checkUpdates = true
 
     init { initialize() }
 }

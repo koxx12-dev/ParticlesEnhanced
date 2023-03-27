@@ -11,11 +11,9 @@ import gg.essential.api.EssentialAPI
 import gg.essential.api.commands.Command
 import gg.essential.api.commands.DefaultHandler
 
-class ParticlesEnhancedCommand(name: String) : Command(name) {
-
+class ParticlesEnhancedCommand : Command("particlesenhanced") {
     @DefaultHandler
     fun handle() {
         EssentialAPI.getGuiUtil().openScreen(ParticlesEnhancedConfig.gui())
     }
-
 }
