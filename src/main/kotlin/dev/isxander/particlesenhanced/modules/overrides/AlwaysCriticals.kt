@@ -8,7 +8,7 @@ package dev.isxander.particlesenhanced.modules.overrides
 
 import dev.isxander.particlesenhanced.config.ParticlesEnhancedConfig
 import dev.isxander.particlesenhanced.utils.PacketEvent
-import dev.isxander.particlesenhanced.utils.mc
+import net.minecraft.client.Minecraft
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
@@ -32,7 +32,7 @@ object AlwaysCriticals {
             val packet = event.packet
             if (packet.opCode.toInt() != 2) return
 
-            val target = packet.getEntity(mc.theWorld) ?: return
+            val target = packet.getEntity(Minecraft.getMinecraft().theWorld) ?: return
             if (attacker != null && targetId == target.entityId) {
                 doCritical(attacker!!, target)
                 attacker = null
@@ -44,7 +44,7 @@ object AlwaysCriticals {
     @SubscribeEvent
     fun onAttack(event: AttackEntityEvent) {
         if (ParticlesEnhancedConfig.checkInvulnerable) {
-            if (event.entityPlayer.entityId == mc.thePlayer.entityId) {
+            if (event.entityPlayer.entityId == Minecraft.getMinecraft().thePlayer.entityId) {
                 attacker = event.entityPlayer
                 targetId = event.target.entityId
             }
@@ -66,7 +66,7 @@ object AlwaysCriticals {
                 && target is EntityLivingBase
 
         if (!criticalHit) {
-            mc.effectRenderer.emitParticleAtEntity(target, EnumParticleTypes.CRIT)
+            Minecraft.getMinecraft().effectRenderer.emitParticleAtEntity(target, EnumParticleTypes.CRIT)
         }
     }
 
