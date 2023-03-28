@@ -1,9 +1,3 @@
-/*
- * Copyright (c) [2021 - 2021] isXander
- *
- * All rights reserved!
- */
-
 package dev.isxander.particlesenhanced.modules.overrides
 
 import dev.isxander.particlesenhanced.config.ParticlesEnhancedConfig
