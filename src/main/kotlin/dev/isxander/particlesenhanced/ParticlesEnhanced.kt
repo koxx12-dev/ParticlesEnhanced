@@ -1,11 +1,6 @@
-/*
- * Copyright (c) [2021 - 2021] isXander
- *
- * All rights reserved!
- */
-
 package dev.isxander.particlesenhanced
 
+import cc.polyfrost.oneconfig.events.EventManager
 import dev.isxander.particlesenhanced.config.ParticlesEnhancedConfig
 import dev.isxander.particlesenhanced.modules.overrides.AlwaysCriticals
 import dev.isxander.particlesenhanced.modules.overrides.AlwaysSharpness
@@ -27,6 +22,8 @@ class ParticlesEnhanced {
     fun onFMLInit(event: FMLInitializationEvent) {
         MinecraftForge.EVENT_BUS.register(AlwaysCriticals)
         MinecraftForge.EVENT_BUS.register(AlwaysSharpness)
+        EventManager.INSTANCE.register(AlwaysSharpness)
+        EventManager.INSTANCE.register(AlwaysCriticals)
 
         config = ParticlesEnhancedConfig
     }

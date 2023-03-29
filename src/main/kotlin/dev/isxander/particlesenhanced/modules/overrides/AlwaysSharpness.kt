@@ -1,11 +1,7 @@
-/*
- * Copyright (c) [2021 - 2021] isXander
- *
- * All rights reserved!
- */
-
 package dev.isxander.particlesenhanced.modules.overrides
 
+import cc.polyfrost.oneconfig.events.event.ReceivePacketEvent
+import cc.polyfrost.oneconfig.libs.eventbus.Subscribe
 import dev.isxander.particlesenhanced.config.ParticlesEnhancedConfig
 import net.minecraft.client.Minecraft
 import net.minecraft.enchantment.EnchantmentHelper
@@ -17,15 +13,14 @@ import net.minecraft.network.play.server.S19PacketEntityStatus
 import net.minecraft.util.EnumParticleTypes
 import net.minecraftforge.event.entity.player.AttackEntityEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import util.PacketEvent
 
 object AlwaysSharpness {
 
     private var attacker: EntityPlayer? = null
     private var targetId = -1
 
-    @SubscribeEvent
-    fun onPacket(event: PacketEvent.Incoming) {
+    @Subscribe
+    fun onPacketReceive(event: ReceivePacketEvent) {
         if (!ParticlesEnhancedConfig.checkInvulnerable) return
 
         if (event.packet is S19PacketEntityStatus) {
