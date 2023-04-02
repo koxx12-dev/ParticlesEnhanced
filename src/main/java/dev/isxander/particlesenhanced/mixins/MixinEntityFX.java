@@ -20,11 +20,10 @@ public abstract class MixinEntityFX {
 
     @Inject(method = "renderParticle", at = @At("HEAD"))
     private void injectOpacity(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ, CallbackInfo ci) {
-        ParticlesEnhancedConfig cfg = ParticlesEnhancedConfig.INSTANCE;
 
-        if (!cfg.getFade()) return;
+        if (!ParticlesEnhancedConfig.INSTANCE.getFade()) return;
 
-        float lifeSpan = (particleAge - (particleMaxAge * (cfg.getMinFadeTransparency() / 100f)) / (particleMaxAge - (particleMaxAge * (cfg.getMinFadeTransparency() / 100f))));
+        float lifeSpan = (particleAge - (particleMaxAge * (ParticlesEnhancedConfig.INSTANCE.getMinFadeTransparency() / 100f)) / (particleMaxAge - (particleMaxAge * (ParticlesEnhancedConfig.INSTANCE.getMinFadeTransparency() / 100f))));
         if (lifeSpan > ParticlesEnhancedConfig.INSTANCE.getFadeOutStart()) {
             float alpha = 1 - lifeSpan + ParticlesEnhancedConfig.INSTANCE.getFadeOutStart();
             if (getAlpha() != alpha) setAlphaF(alpha);

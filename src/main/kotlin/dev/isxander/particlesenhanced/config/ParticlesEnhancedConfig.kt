@@ -7,7 +7,7 @@ import cc.polyfrost.oneconfig.config.annotations.Switch
 import cc.polyfrost.oneconfig.config.data.Mod
 import cc.polyfrost.oneconfig.config.data.ModType
 
-object ParticlesEnhancedConfig : Config(Mod("ParticlesEnhanced", ModType.UTIL_QOL), "particlesenhanced/config.toml") {
+object ParticlesEnhancedConfig : Config(Mod("ParticlesEnhanced", ModType.PVP), "particlesenhanced/config.toml") {
     @Dropdown(
         name = "Critical Particle Type",
         description = "Change what type of particle appears when you get a critical hit.",
@@ -27,14 +27,6 @@ object ParticlesEnhancedConfig : Config(Mod("ParticlesEnhanced", ModType.UTIL_QO
     var sharpParticleType = 10
 
     @Switch(
-        name = "Check Invulnerability",
-        description = "Before showing the critical or sharpness particles, check if the player can be hit (e.g. isn't in creative mode)",
-        category = "Aesthetics",
-        subcategory = "Overrides"
-    )
-    var checkInvulnerable = true
-
-    @Switch(
         name = "Always Show Criticals",
         description = "Every time you hit an entity, critical particles are spawned.",
         category = "Aesthetics",
@@ -51,13 +43,20 @@ object ParticlesEnhancedConfig : Config(Mod("ParticlesEnhanced", ModType.UTIL_QO
     var alwaysSharp = false
 
     @Switch(
-        name = "Override Critical Bow Arrows",
-        description = "When you fire a full charge hit with a bow, critical particles are spawned. Override with your desired particle?",
+        name = "Check Invulnerability",
+        description = "Before showing the critical or sharpness particles, check if the player can be hit (e.g. isn't in creative mode)",
+        category = "Aesthetics",
+        subcategory = "Overrides"
+    )
+    var checkInvulnerable = true
+
+    @Switch(
+        name = "Use Custom Critical Effect for Arrows",
+        description = "Override the trailing particle crit effect on an arrow from a fully charged bow shot.",
         category = "Aesthetics",
         subcategory = "Overrides"
     )
     var overrideCriticalBow = true
-
 
     @Switch(
         name = "Fade",
@@ -73,13 +72,13 @@ object ParticlesEnhancedConfig : Config(Mod("ParticlesEnhanced", ModType.UTIL_QO
         category = "Aesthetics",
         subcategory = "Fade",
         max = 1F,
-        min = 0F
+        min = 0F,
     )
     var fadeOutStart = 0.5f
 
     @Slider(
-        name = "Minimum Transparency",
-        description = "Rather than fading to nothing fade to this value.",
+        name = "Maximum Opacity",
+        description = "Rather than fading to nothing, fade to this value. 100 is qquivalent to Fade being off.",
         category = "Aesthetics",
         subcategory = "Fade",
         max = 100F,
