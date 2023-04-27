@@ -1,14 +1,14 @@
 [
   {
-    "modid": "particlesenhanced",
-    "name": "Particles Enhanced",
-    "description": "2021's take at particles in Minecraft",
-    "version": "1.2.1",
-    "mcversion": "1.8.9",
-    "url": "https://github.com/MicrocontrollersDev/ParticlesEnhanced",
+    "modid": "${mod_id}",
+    "name": "${mod_name}",
+    "description": "${mod_description}",
+    "version": "${mod_version}",
+    "mcversion": "${mc_version}",
+    "url": "https://github.com/isXander/ForgeKotlinTemplate",
     "updateUrl": "",
-    "authorList": ["isXander, Microcontrollers"],
-    "credits": "isXander for the original project.",
+    "authorList": ["isXander"],
+    "credits": "isXander for the project template.",
     "logoFile": "",
     "screenshots": [],
     "dependencies": []

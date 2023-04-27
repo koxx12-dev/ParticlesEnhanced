@@ -1,21 +1,25 @@
+import groovy.lang.MissingPropertyException
 pluginManagement {
     repositories {
-        mavenCentral()
-        gradlePluginPortal()
-        maven("https://oss.sonatype.org/content/repositories/snapshots")
-        maven("https://maven.architectury.dev/")
+        // Snapshots
+        maven("https://maven.deftu.xyz/snapshots")
+        maven("https://s01.oss.sonatype.org/content/groups/public/")
+        mavenLocal()
+
+        // Repositories
+        maven("https://maven.deftu.xyz/releases")
         maven("https://maven.fabricmc.net")
-        maven("https://maven.minecraftforge.net/")
-        maven("https://repo.spongepowered.org/maven/")
+        maven("https://maven.architectury.dev/")
+        maven("https://maven.minecraftforge.net")
         maven("https://repo.essential.gg/repository/maven-public")
-    }
-    resolutionStrategy {
-        eachPlugin {
-            when (requested.id.id) {
-                "gg.essential.loom" -> useModule("gg.essential:architectury-loom:${requested.version}")
-            }
-        }
+        maven("https://jitpack.io/")
+
+        // Default repositories
+        gradlePluginPortal()
+        mavenCentral()
     }
 }
 
-rootProject.name = "particlesenhanced"
+val projectName: String = extra["mod.name"]?.toString() ?: throw MissingPropertyException("mod.name has not been set.")
+rootProject.name = projectName
+rootProject.buildFileName = "build.gradle.kts"

@@ -5,7 +5,7 @@ import gg.essential.vigilance.data.Property
 import gg.essential.vigilance.data.PropertyType
 import java.io.File
 
-object ParticlesEnhancedConfig : Vigilant(File("config/particlesenhanced", "config.toml"), "Particles Enhanced") {
+object ParticlesEnhancedConfig : Vigilant(File("config", "particlesenhanced.toml"), "Particles Enhanced") {
     @Property(
         type = PropertyType.SELECTOR,
         name = "Critical Particle Type",
@@ -26,16 +26,14 @@ object ParticlesEnhancedConfig : Vigilant(File("config/particlesenhanced", "conf
     )
     var sharpParticleType = 10
 
-    /* Currently doesn't work so :)
     @Property(
         type = PropertyType.SWITCH,
         name = "Check Invulnerability",
         description = "Before showing the critical or sharpness particles, check if the player can be hit (e.g. isn't in creative mode)",
         category = "Aesthetics",
         subcategory = "Overrides"
-    )*/
+    )
     var checkInvulnerable = false
-
 
     @Property(
         type = PropertyType.SWITCH,

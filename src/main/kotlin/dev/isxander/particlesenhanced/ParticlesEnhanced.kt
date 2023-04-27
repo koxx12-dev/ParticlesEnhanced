@@ -9,9 +9,9 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 
 @Mod(
-    modid = "particlesenhanced",
-    name = "Particles Enhanced",
-    version = "1.2.1",
+    modid = "@MOD_ID@",
+    name = "@MOD_NAME@",
+    version = "@MOD_VERSION@",
     acceptedMinecraftVersions = "[1.8.9]",
     clientSideOnly = true
 )
@@ -26,8 +26,6 @@ class ParticlesEnhanced {
         MinecraftForge.EVENT_BUS.register(AlwaysSharpness)
 
         ParticlesEnhancedCommand().register()
-
-        ParticlesEnhancedConfig.checkInvulnerable = false // it broken :)
     }
 
 }
